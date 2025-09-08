@@ -1,0 +1,25 @@
+# NodeShot Chrome Extension .gitignore
+
+# Trae AI工作目录
+.trae/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# Node.js相关文件
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE配置文件
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# 临时文件
+*.tmp
+*.bak
+*.swp
+*.log
