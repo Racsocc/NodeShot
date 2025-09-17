@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NodeShot 设置</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      opacity: 0.9;
+      font-size: 16px;
+    }
+    
+    .content {
+      padding: 40px;
+    }
+    
+    .section {
+      margin-bottom: 40px;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .section-title .icon {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+    
+    .form-group {
+      margin-bottom: 24px;
+    }
+    
+    .form-label {
+      display: block;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      background: #f9fafb;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: #4f46e5;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+    
+    .form-select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #f9fafb;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .form-select:focus {
+      outline: none;
+      border-color: #4f46e5;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+    
+    .form-range {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #e5e7eb;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+    
+    .form-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #4f46e5;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+    }
+    
+    .form-range::-webkit-slider-thumb:hover {
+      background: #3730a3;
+      transform: scale(1.1);
+    }
+    
+    .form-range::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #4f46e5;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    
+    .checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: #4f46e5;
+    }
+    
+    .checkbox-label {
+      font-size: 14px;
+      color: #6b7280;
+      cursor: pointer;
+    }
+    
+    .form-description {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+    
+    .btn-secondary {
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
+    
+    .btn-secondary:hover {
+      background: #e5e7eb;
+    }
+    
+    .btn .icon {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+    
+    .status-message {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      display: none;
+    }
+    
+    .status-success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    
+    .status-error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+    
+    .preview-section {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+    
+    .preview-title {
+      font-weight: 500;
+      color: #475569;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    
+    .preview-text {
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 13px;
+      color: #64748b;
+      background: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .usage-guide {
+      margin-top: 16px;
+    }
+    
+    .usage-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border-left: 4px solid #4f46e5;
+    }
+    
+    .step-number {
+      background: #4f46e5;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    
+    .step-content h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 4px;
+    }
+    
+    .step-content p {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.5;
+      margin: 0;
+    }
+    
+    .tips-section {
+      margin-top: 24px;
+      padding: 20px;
+      background: #fef3c7;
+      border-radius: 8px;
+      border: 1px solid #fbbf24;
+    }
+    
+    .tips-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #92400e;
+      margin-bottom: 12px;
+    }
+    
+    .tips-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .tips-list li {
+      font-size: 14px;
+      color: #92400e;
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+    
+    .tips-list li:before {
+      content: '•';
+      color: #f59e0b;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    
+    kbd {
+      background: #374151;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: monospace;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        margin: 10px;
+      }
+      
+      .content {
+        padding: 20px;
+      }
+      
+      .button-group {
+        flex-direction: column;
+      }
+      
+      .btn {
+        justify-content: center;
+      }
+      
+      .usage-step {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .step-number {
+        align-self: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>NodeShot 设置</h1>
+      <p>自定义您的截图体验</p>
+    </div>
+    
+    <div class="content">
+      <div id="statusMessage" class="status-message"></div>
+      
+      <!-- 下载设置 -->
+      <div class="section">
+        <h2 class="section-title">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          下载设置
+        </h2>
+        
+        <div class="form-group">
+          <label class="form-label" for="fileNamePrefix">文件名前缀</label>
+          <input type="text" id="fileNamePrefix" class="form-input" value="NodeShot" placeholder="例如: NodeShot">
+          <div class="form-description">
+            截图文件名的前缀，将自动添加时间戳和网站信息。
+          </div>
+        </div>
+      </div>
+      
+      <!-- 文件命名 -->
+      <div class="section">
+        <h2 class="section-title">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14,2 14,8 20,8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10,9 9,9 8,9"/>
+          </svg>
+          文件命名
+        </h2>
+        
+        <div class="form-group">
+          <label class="form-label" for="fileNameTemplate">文件名模板</label>
+          <input type="text" id="fileNameTemplate" class="form-input" value="NodeShot_{timestamp}_{domain}">
+          <div class="form-description">
+            可用变量: {timestamp} - 时间戳, {domain} - 网站域名, {title} - 页面标题, {element} - 元素标签
+          </div>
+        </div>
+        
+
+        
+        <div class="preview-section">
+          <div class="preview-title">文件名预览:</div>
+          <div id="fileNamePreview" class="preview-text">NodeShot_20240101_120000_example.com.png</div>
+        </div>
+      </div>
+      
+      <!-- 截图设置 -->
+      <div class="section">
+        <h2 class="section-title">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+          截图设置
+        </h2>
+        
+        <div class="form-group">
+          <label class="form-label" for="imageQuality">图片质量: <span id="qualityValue">90</span></label>
+          <input type="range" id="imageQuality" class="form-range" min="10" max="100" value="90" step="5">
+          <div class="form-description">
+            拖动滑块调整图片质量，数值越高质量越好但文件越大。
+          </div>
+        </div>
+        
+
+        
+
+      </div>
+      
+      <!-- 界面设置 -->
+      <div class="section">
+        <h2 class="section-title">
+          <svg class="icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+          </svg>
+          界面设置
+        </h2>
+        
+
+        
+
+        
+
+      </div>
+      
+      <!-- 使用说明 -->
+      <div class="section">
+        <h2 class="section-title">
+          <svg class="icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+            <path d="M12 17h.01"/>
+          </svg>
+          使用说明
+        </h2>
+        
+        <div class="usage-guide">
+          <div class="usage-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>激活截图模式</h3>
+              <p>点击浏览器工具栏中的 NodeShot 图标即可激活截图模式。</p>
+            </div>
+          </div>
+          
+          <div class="usage-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>选择截图元素</h3>
+              <p>在截图模式下，将鼠标悬停在页面元素上，元素会被高亮显示。点击要截图的元素。</p>
+            </div>
+          </div>
+          
+          <div class="usage-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>自动保存</h3>
+              <p>截图会自动保存到您设置的下载路径中，文件名根据您的命名模板生成。</p>
+            </div>
+          </div>
+          
+          <div class="usage-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>快捷键</h3>
+              <p>在截图模式下，按 <kbd>Esc</kbd> 键可以退出截图模式。</p>
+            </div>
+          </div>
+          
+          <div class="usage-step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h3>访问设置</h3>
+              <p>右键点击 NodeShot 图标，选择"选项"即可打开此设置页面。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tips-section">
+          <h3 class="tips-title">💡 使用技巧</h3>
+          <ul class="tips-list">
+            <li>建议使用 PNG 格式以获得最佳图片质量</li>
+            <li>可以通过文件名模板自定义截图文件的命名规则</li>
+            <li>高质量设置会产生更大的文件，请根据需要选择</li>
+            <li>在高分辨率屏幕上，插件会自动优化截图清晰度</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- 按钮组 -->
+      <div class="button-group">
+        <button id="resetBtn" class="btn btn-secondary">
+          <svg class="icon" viewBox="0 0 24 24">
+            <polyline points="23 4 23 10 17 10"/>
+            <polyline points="1 20 1 14 7 14"/>
+            <path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
+          </svg>
+          重置为默认
+        </button>
+        <button id="saveBtn" class="btn btn-primary">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+            <polyline points="17 21 17 13 7 13 7 21"/>
+            <polyline points="7 3 7 8 15 8"/>
+          </svg>
+          保存设置
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html>

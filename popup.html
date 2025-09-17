@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NodeShot</title>
+  <style>
+    body {
+      width: 320px;
+      min-height: 200px;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #4285F4, #34A853);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    
+    .header p {
+      margin: 8px 0 0 0;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+    
+    .content {
+      padding: 20px;
+    }
+    
+    .action-button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .activate-btn {
+      background: #4285F4;
+      color: white;
+    }
+    
+    .activate-btn:hover {
+      background: #3367D6;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+    }
+    
+    .activate-btn:active {
+      transform: translateY(0);
+    }
+    
+    .activate-btn:disabled {
+      background: #9AA0A6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .secondary-btn {
+      background: white;
+      color: #5F6368;
+      border: 1px solid #DADCE0;
+    }
+    
+    .secondary-btn:hover {
+      background: #F8F9FA;
+      border-color: #DADCE0;
+    }
+    
+    .status {
+      text-align: center;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+    
+    .status.active {
+      background: #E8F5E8;
+      color: #137333;
+      border: 1px solid #CEEAD6;
+    }
+    
+    .status.inactive {
+      background: #FEF7E0;
+      color: #B06000;
+      border: 1px solid #FEEFC3;
+    }
+    
+    .instructions {
+      font-size: 12px;
+      color: #5F6368;
+      line-height: 1.4;
+      margin-top: 16px;
+      padding: 12px;
+      background: white;
+      border-radius: 6px;
+      border: 1px solid #E8EAED;
+    }
+    
+    .instructions h3 {
+      margin: 0 0 8px 0;
+      font-size: 13px;
+      color: #202124;
+    }
+    
+    .instructions ol {
+      margin: 0;
+      padding-left: 16px;
+    }
+    
+    .instructions li {
+      margin-bottom: 4px;
+    }
+    
+    .footer {
+      padding: 16px 20px;
+      border-top: 1px solid #E8EAED;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer a {
+      color: #4285F4;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .icon {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>NodeShot</h1>
+    <p>精确截取网页元素</p>
+  </div>
+  
+  <div class="content">
+    <div id="status" class="status inactive">
+      插件未激活
+    </div>
+    
+    <button id="activateBtn" class="action-button activate-btn">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      激活截图模式
+    </button>
+    
+    <button id="settingsBtn" class="action-button secondary-btn">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+      </svg>
+      设置
+    </button>
+    
+    <div class="instructions">
+      <h3>使用说明：</h3>
+      <ol>
+        <li>点击"激活截图模式"</li>
+        <li>在网页上移动鼠标选择元素</li>
+        <li>点击目标元素进行截图</li>
+        <li>截图将自动下载到指定文件夹</li>
+        <li>按ESC键退出截图模式</li>
+      </ol>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <span style="font-size: 12px; color: #5F6368;">v1.0.0</span>
+    <a href="#" id="helpLink">帮助</a>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
